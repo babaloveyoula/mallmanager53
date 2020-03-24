@@ -11,7 +11,14 @@ import axios from "axios"
 Vue.use(ElementUI);
 Vue.config.productionTip = false
 Vue.prototype.$http=axios
+// 设置公共基准地址
 axios.defaults.baseURL="https://www.liulongbin.top:8888/api/private/v1/"
+// 设置http请求授权
+axios.interceptors.request.use(config=>{
+  
+  config.headers.Authorization=window.sessionStorage.getItem("token")
+  return config
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
